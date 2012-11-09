@@ -18,7 +18,7 @@
     <property name="geometry">
      <rect>
       <x>340</x>
-      <y>440</y>
+      <y>430</y>
       <width>51</width>
       <height>51</height>
      </rect>
@@ -31,7 +31,7 @@
     <property name="geometry">
      <rect>
       <x>480</x>
-      <y>440</y>
+      <y>430</y>
       <width>51</width>
       <height>51</height>
      </rect>
@@ -44,7 +44,7 @@
     <property name="geometry">
      <rect>
       <x>410</x>
-      <y>440</y>
+      <y>430</y>
       <width>51</width>
       <height>51</height>
      </rect>
@@ -63,7 +63,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QGraphicsView" name="exampleGestureView">
+   <widget class="QGraphicsView" name="typeGestureView">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -73,17 +73,43 @@
      </rect>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="gestureNameLabel">
     <property name="geometry">
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>46</width>
-      <height>13</height>
+      <width>161</width>
+      <height>16</height>
      </rect>
     </property>
     <property name="text">
-     <string>Образец</string>
+     <string>gestureType</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="nextType">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>190</y>
+      <width>81</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>nextGesture</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="prevType">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>190</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>prevGesture</string>
     </property>
    </widget>
   </widget>

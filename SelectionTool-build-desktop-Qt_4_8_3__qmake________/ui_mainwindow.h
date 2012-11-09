@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Wed 7. Nov 14:39:32 2012
+** Created: Thu 8. Nov 22:13:33 2012
 **      by: Qt User Interface Compiler version 4.8.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -16,6 +16,7 @@
 #include <QtGui/QButtonGroup>
 #include <QtGui/QGraphicsView>
 #include <QtGui/QHeaderView>
+#include <QtGui/QLabel>
 #include <QtGui/QMainWindow>
 #include <QtGui/QMenuBar>
 #include <QtGui/QPushButton>
@@ -31,8 +32,11 @@ public:
     QPushButton *prevButton;
     QPushButton *nextButton;
     QPushButton *removeButton;
-    QGraphicsView *graphicsView;
-    QGraphicsView *graphicsView_2;
+    QGraphicsView *gestureView;
+    QGraphicsView *typeGestureView;
+    QLabel *gestureNameLabel;
+    QPushButton *nextType;
+    QPushButton *prevType;
     QMenuBar *menuBar;
     QStatusBar *statusBar;
 
@@ -45,19 +49,28 @@ public:
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         prevButton = new QPushButton(centralWidget);
         prevButton->setObjectName(QString::fromUtf8("prevButton"));
-        prevButton->setGeometry(QRect(360, 440, 51, 51));
+        prevButton->setGeometry(QRect(340, 430, 51, 51));
         nextButton = new QPushButton(centralWidget);
         nextButton->setObjectName(QString::fromUtf8("nextButton"));
-        nextButton->setGeometry(QRect(500, 440, 51, 51));
+        nextButton->setGeometry(QRect(480, 430, 51, 51));
         removeButton = new QPushButton(centralWidget);
         removeButton->setObjectName(QString::fromUtf8("removeButton"));
-        removeButton->setGeometry(QRect(430, 440, 51, 51));
-        graphicsView = new QGraphicsView(centralWidget);
-        graphicsView->setObjectName(QString::fromUtf8("graphicsView"));
-        graphicsView->setGeometry(QRect(140, 10, 511, 391));
-        graphicsView_2 = new QGraphicsView(centralWidget);
-        graphicsView_2->setObjectName(QString::fromUtf8("graphicsView_2"));
-        graphicsView_2->setGeometry(QRect(0, 10, 131, 111));
+        removeButton->setGeometry(QRect(410, 430, 51, 51));
+        gestureView = new QGraphicsView(centralWidget);
+        gestureView->setObjectName(QString::fromUtf8("gestureView"));
+        gestureView->setGeometry(QRect(180, 30, 511, 391));
+        typeGestureView = new QGraphicsView(centralWidget);
+        typeGestureView->setObjectName(QString::fromUtf8("typeGestureView"));
+        typeGestureView->setGeometry(QRect(10, 30, 161, 141));
+        gestureNameLabel = new QLabel(centralWidget);
+        gestureNameLabel->setObjectName(QString::fromUtf8("gestureNameLabel"));
+        gestureNameLabel->setGeometry(QRect(10, 10, 161, 16));
+        nextType = new QPushButton(centralWidget);
+        nextType->setObjectName(QString::fromUtf8("nextType"));
+        nextType->setGeometry(QRect(90, 190, 81, 23));
+        prevType = new QPushButton(centralWidget);
+        prevType->setObjectName(QString::fromUtf8("prevType"));
+        prevType->setGeometry(QRect(10, 190, 75, 23));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
@@ -78,6 +91,9 @@ public:
         prevButton->setText(QApplication::translate("MainWindow", "Prev", 0, QApplication::UnicodeUTF8));
         nextButton->setText(QApplication::translate("MainWindow", "Next", 0, QApplication::UnicodeUTF8));
         removeButton->setText(QApplication::translate("MainWindow", "Remove", 0, QApplication::UnicodeUTF8));
+        gestureNameLabel->setText(QApplication::translate("MainWindow", "gestureType", 0, QApplication::UnicodeUTF8));
+        nextType->setText(QApplication::translate("MainWindow", "nextGesture", 0, QApplication::UnicodeUTF8));
+        prevType->setText(QApplication::translate("MainWindow", "prevGesture", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };
