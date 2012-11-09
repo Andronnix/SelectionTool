@@ -13,6 +13,8 @@ MainWindow::MainWindow(QWidget *parent) :
 void MainWindow::setupButtons(){
     connect(ui->nextButton, SIGNAL(clicked()), this, SLOT(nextGesture()));
     connect(ui->prevButton, SIGNAL(clicked()), this, SLOT(prevGesture()));
+    connect(ui->nextType, SIGNAL(clicked()), this, SLOT(nextGestureType()));
+    connect(ui->prevType, SIGNAL(clicked()), this, SLOT(prevGestureType()));
 }
 void MainWindow::setupViews(){
     ui->gestureView->setScene(&userGestureView);
@@ -46,7 +48,8 @@ void MainWindow::openFile(const QString &path)
     docElem = doc.documentElement();
     curType = docElem.firstChild();
     curGest = curType.firstChild();
-    drawGesture();
+    drawGesture(&typeGestureView,curType.toElement().attribute("idealPath",""));
+    drawGesture(&userGestureView,curGest.toElement().attribute("path",""));
 }
 void MainWindow::setupFileMenu()
 {
@@ -59,41 +62,66 @@ void MainWindow::setupFileMenu()
     fileMenu->addAction(tr("E&xit"), qApp, SLOT(quit()),
                         QKeySequence::Quit);
 }
+void MainWindow::nextGestureType(){
+    if(!curType.nextSibling().isNull()){
+        curType = curType.nextSibling();
+        curGest = curType.firstChild();
+        if(curType.isElement()){
+            drawGesture(&typeGestureView,curType.toElement().attribute("idealPath",""));
+        }
+    }else{
+        QMessageBox::critical(this,"Error","no type");
+        return;
+    }
+}
+void MainWindow::prevGestureType(){
+    if(!curType.previousSibling().isNull()){
+        curType = curType.previousSibling();
+        curGest = curType.firstChild();
+        if(curType.isElement()){
+            drawGesture(&typeGestureView,curType.toElement().attribute("idealPath",""));
+        }
+    }else{
+        QMessageBox::critical(this,"Error","no type");
+        return;
+    }
+}
 void MainWindow::nextGesture(){
     if(!curGest.nextSibling().isNull()){
         curGest = curGest.nextSibling();
         if(curGest.isElement()){
             QDomElement n=curGest.toElement();
+            drawGesture(&userGestureView,n.attribute("path",""));
         }
     }else{
         QMessageBox::critical(this,"Error","no gesture");
         return;
     }
-    drawGesture();
 }
 void MainWindow::prevGesture(){
     if(!curGest.previousSibling().isNull()){
         curGest = curGest.previousSibling();
         if(curGest.isElement()){
             QDomElement n=curGest.toElement();
+            drawGesture(&userGestureView,n.attribute("path",""));
         }
     }else{
         QMessageBox::critical(this,"Error","no gesture");
         return;
     }
-    drawGesture();
 }
-void MainWindow::drawGesture(){
+void MainWindow::drawGesture(QGraphicsScene *scene, QString strPath){
     QPen pen(Qt::blue);
     QBrush brush(Qt::transparent);
     QPainterPath path;
     if(!curGest.isElement())return;
-    QString strPath=curGest.toElement().attribute("path","");
+    strPath.remove(" ");
     QStringList strList = strPath.split(":", QString::SkipEmptyParts);
     QList<QPointF> points;
     int maxW=0,maxH=0;
     if(strList.size()>0){
         foreach(QString s,strList){
+            if(s.isNull() || s.isEmpty())continue;
             QStringList pos=s.split(",");
             bool ok;
             int x = pos.at(0).toInt(&ok),y=pos.at(1).toInt(&ok);
@@ -104,23 +132,22 @@ void MainWindow::drawGesture(){
                 points.append(p);
             }
         }
-        float dx=maxW/userGestureView.width(),dy=maxH/userGestureView.height();
         QPointF p=points.at(0);
-        p.setX(p.x()*dx);
-        p.setY(p.y()*dy);
         path.moveTo(p);
-        foreach(QPointF p,points){
+        for(int i=1;i<points.size();i++){
+            QPointF p=points.at(i);
             path.lineTo(p);
-            p.setX(p.x()*dx);
-            p.setY(p.y()*dy);
         }
+
     }else{
         QMessageBox::critical(this,"noGest","noGesture");
     }
-    userGestureView.clear();
-    userGestureView.addPath(path,pen,brush);
+    scene->clear();
+    scene->addPath(path,pen,brush);
+    scene->views().first()->fitInView(10,10,scene->views().first()->width()-10,scene->views().first()->height()-10);
 }
 MainWindow::~MainWindow()
 {
     delete ui;
 }
+

@@ -23,6 +23,8 @@ public slots:
     void openFile(const QString &path = QString());
     void nextGesture();
     void prevGesture();
+    void nextGestureType();
+    void prevGestureType();
 
 private:
     Ui::MainWindow *ui;    
@@ -32,7 +34,7 @@ private:
     void setupFileMenu();
     void setupButtons();
     void setupViews();
-    void drawGesture();
+    void drawGesture(QGraphicsScene *scene,QString strPath);
 };
 
 #endif // MAINWINDOW_H
