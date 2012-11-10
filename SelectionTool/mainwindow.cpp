@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <stdio.h>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -23,7 +22,9 @@ void MainWindow::setupViews(){
     ui->typeGestureView->setScene(&typeGestureView);
 }
 void MainWindow::closeEvent(QCloseEvent *event) {
-    printf("jopa");
+    saveFile();
+}
+void MainWindow::saveFile(){
     QFile outFile( fileName );
     if( !outFile.open( QIODevice::WriteOnly | QIODevice::Text ) )
     {
@@ -40,8 +41,8 @@ void MainWindow::closeEvent(QCloseEvent *event) {
 }
 void MainWindow::openFile(const QString &path)
 {
+    if(!fileName.isNull() && !fileName.isEmpty())saveFile();
     fileName = path;
-
     if (fileName.isNull())
         fileName = QFileDialog::getOpenFileName(this,
             tr("Open File"), "", "Xml Files (*.xml)");

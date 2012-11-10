@@ -36,6 +36,7 @@ private:
     void setupFileMenu();
     void setupButtons();
     void setupViews();
+    void saveFile();
     void drawGesture(QGraphicsView *view,QString strPath);
 
 protected:
