@@ -5,7 +5,6 @@
 #include <QtGui>
 #include <QtXml/QDomDocument>
 #include <QtXml/QDomElement>
-#include <qmath.h>
 
 namespace Ui {
 class MainWindow;
@@ -25,16 +24,22 @@ public slots:
     void prevGesture();
     void nextGestureType();
     void prevGestureType();
+    void deleteGesture();
 
 private:
     Ui::MainWindow *ui;    
     QDomElement docElem;
     QDomNode curType,curGest;
     QGraphicsScene userGestureView,typeGestureView;
+    QString fileName;
+    QDomDocument doc;
     void setupFileMenu();
     void setupButtons();
     void setupViews();
-    void drawGesture(QGraphicsScene *scene,QString strPath);
+    void drawGesture(QGraphicsView *view,QString strPath);
+
+protected:
+    void closeEvent(QCloseEvent *event);
 };
 
 #endif // MAINWINDOW_H
