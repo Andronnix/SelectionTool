@@ -37,6 +37,7 @@ private:
     void setupButtons();
     void setupViews();
     void saveFile();
+    void changeButtonsState();
     void drawGesture(QGraphicsView *view,QString strPath);
 
 protected:
